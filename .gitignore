@@ -225,3 +225,4 @@ data/
 .claude/
 *claude*
 *CLAUDE*
+docs/data_dictionary.md
