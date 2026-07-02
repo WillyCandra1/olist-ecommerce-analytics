@@ -217,6 +217,11 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Environment variables and secrets
+# Project-private files, never committed
 .env
-claude.md
+CLAUDE.md
+docs/INTERVIEW_NOTES.md
+data/
+.claude/
+*claude*
+*CLAUDE*
