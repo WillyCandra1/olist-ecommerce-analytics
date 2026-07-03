@@ -218,6 +218,8 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Project-private files, never committed
+.vscode/
+docs/project_guide.docx
 .env
 CLAUDE.md
 docs/INTERVIEW_NOTES.md
