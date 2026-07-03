@@ -226,3 +226,7 @@ data/
 *claude*
 *CLAUDE*
 docs/data_dictionary.md
+powerbi/connection_guide.md
+powerbi/dashboard_spec.md
+powerbi/dax_measures.md
+sql/query_results.md
