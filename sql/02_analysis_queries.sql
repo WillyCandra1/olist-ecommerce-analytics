@@ -42,11 +42,14 @@ ORDER BY revenue DESC;
 SELECT
     c.customer_state,
     COUNT(*) AS delivered_orders,
-    CAST(AVG(DATEDIFF(DAY, o.order_purchase_timestamp, o.order_delivered_customer_date) * 1.0)
+    -- full elapsed days, floored, same definition as the notebooks and the BI views
+    CAST(AVG(DATEDIFF(SECOND, o.order_purchase_timestamp, o.order_delivered_customer_date) / 86400 * 1.0)
          AS DECIMAL(5, 1)) AS avg_delivery_days,
     CAST(AVG(DATEDIFF(DAY, o.order_estimated_delivery_date, o.order_delivered_customer_date) * 1.0)
          AS DECIMAL(5, 1)) AS avg_days_vs_estimate,
-    CAST(100.0 * SUM(CASE WHEN o.order_delivered_customer_date > o.order_estimated_delivery_date
+    -- dates, not timestamps: arriving on the promised day at 18:00 is on time
+    CAST(100.0 * SUM(CASE WHEN CAST(o.order_delivered_customer_date AS DATE)
+                               > CAST(o.order_estimated_delivery_date AS DATE)
                           THEN 1 ELSE 0 END) / COUNT(*) AS DECIMAL(5, 2)) AS late_pct
 FROM dbo.orders AS o
 JOIN dbo.customers AS c ON c.customer_id = o.customer_id

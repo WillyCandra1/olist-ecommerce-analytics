@@ -8,7 +8,7 @@ Olist connects small Brazilian retailers to large marketplaces. Leadership wants
 
 ## The data
 
-Nine relational CSV files from [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce): orders, order items, payments, reviews, customers, products, sellers, geolocation, and a category translation table. The raw files are not in this repo because the Kaggle license does not allow redistribution; download them into `data/raw/` and you can rerun everything below.
+Nine relational CSV files from [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce): orders, order items, payments, reviews, customers, products, sellers, geolocation, and a category translation table. The raw files stay out of the repo; `python src/download_data.py` pulls all nine from Kaggle into `data/raw/`, no Kaggle account needed, and then everything below reproduces.
 
 ## Architecture
 
@@ -42,13 +42,13 @@ Three Power BI pages built on five SQL views: Executive Overview, Customer Analy
 
 ## Reproduce it
 
-1. Download the 9 Kaggle CSVs into `data/raw/`.
-2. `python -m venv .venv`, activate it, `pip install -r requirements.txt` (Python 3.12).
+1. `python -m venv .venv`, activate it, `pip install -r requirements.txt` (Python 3.12).
+2. `python src/download_data.py` pulls the 9 Kaggle CSVs into `data/raw/`.
 3. Run `notebooks/01_data_audit_cleaning.ipynb` top to bottom. It writes cleaned parquet to `data/processed/`.
-4. Start LocalDB (`sqllocaldb start MSSQLLocalDB`, database `olist`), then `python src/load_to_sql.py`. The loader rebuilds the schema, loads all tables, and fails if any SQL row count differs from parquet.
-5. `sqlcmd -S "(localdb)\MSSQLLocalDB" -d olist -i sql\03_powerbi_views.sql` for the Power BI views. `sql/02_analysis_queries.sql` holds the analysis queries; sample results are in `sql/02_query_results.md`.
+4. Start LocalDB (`sqllocaldb start MSSQLLocalDB`), then `python src/load_to_sql.py`. One command: it creates the `olist` database if missing, rebuilds the schema, loads all tables, fails if any SQL row count differs from parquet, and creates the five Power BI views.
+5. `sql/02_analysis_queries.sql` holds the analysis queries; sample results are in `sql/02_query_results.md`.
 6. Run `notebooks/02_eda.ipynb` and `notebooks/03_review_model.ipynb`.
-7. For the dashboard, follow `powerbi/connection_guide.md`.
+7. For the dashboard, follow `powerbi/connection_guide.md`. The DAX file lists the exact numbers your build must reproduce, so the trail from raw CSV to dashboard stays verifiable end to end.
 
 ## Repository structure
 
@@ -62,7 +62,8 @@ olist-ecommerce-analytics/
 |   |-- 02_eda.ipynb                   the four findings and seven figures
 |   |-- 03_review_model.ipynb          low-review prediction, SHAP analysis
 |-- src/
-|   |-- load_to_sql.py                 parquet to LocalDB with parity check
+|   |-- download_data.py               pulls the 9 CSVs from Kaggle into data/raw
+|   |-- load_to_sql.py                 parquet to LocalDB: schema, load, parity check, views
 |-- sql/
 |   |-- 01_schema.sql                  tables, keys, measured types
 |   |-- 02_analysis_queries.sql        six business questions in T-SQL

@@ -21,7 +21,9 @@ SELECT
     oi.price,
     oi.freight_value,
     oi.price + oi.freight_value AS revenue,
-    DATEDIFF(DAY, o.order_purchase_timestamp, o.order_delivered_customer_date) AS delivery_days,
+    -- full elapsed days, floored, matching the pandas definition in the notebooks;
+    -- DATEDIFF(DAY, ...) would count calendar-date changes and read 0.4 days higher
+    DATEDIFF(SECOND, o.order_purchase_timestamp, o.order_delivered_customer_date) / 86400 AS delivery_days,
     -- dates, not timestamps: arriving 22:00 on the promised day is on time
     DATEDIFF(DAY, CAST(o.order_estimated_delivery_date AS DATE),
                   CAST(o.order_delivered_customer_date AS DATE)) AS delivery_delay_days,

@@ -10,11 +10,10 @@ Open a terminal in the project root:
 sqllocaldb start MSSQLLocalDB
 ```
 
-If this machine was rebuilt or the database is empty, reload it (takes about a minute) and recreate the views:
+If this machine was rebuilt or the database is empty, one command reloads everything, views included (run `src\download_data.py` and notebook 01 first if `data/processed/` is empty):
 
 ```
 .venv\Scripts\python.exe src\load_to_sql.py
-sqlcmd -S "(localdb)\MSSQLLocalDB" -d olist -i sql\03_powerbi_views.sql
 ```
 
 Quick check that the views exist:

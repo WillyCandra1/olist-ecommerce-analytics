@@ -41,14 +41,14 @@ computers_accessories        7644 1032723.77               6.70
 
 ```
 customer_state  delivered_orders  avg_delivery_days  avg_days_vs_estimate  late_pct
-            RR                41               29.3                 -17.3     12.20
-            AP                67               27.2                 -19.7      4.48
-            AM               145               26.4                 -19.6      4.14
-            AL               397               24.5                  -8.7     23.93
-            PA               946               23.7                 -14.1     12.37
-            MA               717               21.5                  -9.6     19.67
-            SE               335               21.5                 -10.0     15.22
-            CE              1279               21.2                 -10.8     15.32
+            RR                41               29.0                 -17.3     12.20
+            AP                67               26.7                 -19.7      2.99
+            AM               145               26.0                 -19.6      2.76
+            AL               397               24.0                  -8.7     21.41
+            PA               946               23.3                 -14.1     11.21
+            MA               717               21.1                  -9.6     17.43
+            SE               335               21.0                 -10.0     15.22
+            CE              1279               20.8                 -10.8     13.76
 ```
 
 ## Q4: Which sellers generate the most revenue, and how well are their orders reviewed? (BQ1)
