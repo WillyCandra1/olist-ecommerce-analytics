@@ -34,11 +34,10 @@ CSV to pandas (audit and cleaning) to SQL Server LocalDB (star schema and analys
 
 Three Power BI pages built on five SQL views: Executive Overview, Customer Analytics, Delivery Operations. The spec, DAX measures, and connection guide are in `powerbi/`.
 
-<!-- Screenshots: after building the dashboard, save page screenshots to
-     powerbi/screenshots/ and replace these placeholders. -->
-*Executive Overview screenshot pending*
-*Customer Analytics screenshot pending*
-*Delivery Operations screenshot pending*
+![Executive Overview](powerbi/screenshots/01_executive_overview.png)
+![Customer Analytics](powerbi/screenshots/02_customer_analytics.png)
+![Delivery Operations](powerbi/screenshots/03_delivery_operations.png)
+
 
 ## Reproduce it
 
