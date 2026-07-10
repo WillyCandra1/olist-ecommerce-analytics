@@ -89,13 +89,13 @@ Format: decimal, 2 decimals. Orders without a review return blank and AVERAGEX s
 
 ```dax
 MoM Revenue Growth Percent =
-VAR PreviousMonth =
+VAR PrevMonthRevenue =
     CALCULATE([Total Revenue], DATEADD(dim_date[date], -1, MONTH))
 RETURN
-    DIVIDE([Total Revenue] - PreviousMonth, PreviousMonth)
+    DIVIDE([Total Revenue] - PrevMonthRevenue, PrevMonthRevenue)
 ```
 
-Format: percentage, 1 decimal. DATEADD only works after dim_date is marked as the date table (step 6 in the connection guide). Expect absurd values around the near-empty months of late 2016; that is the data, not a bug.
+Format: percentage, 1 decimal. The variable cannot be called PreviousMonth: DAX rejects a variable named after a built-in function, and PREVIOUSMONTH is one. DATEADD only works after dim_date is marked as the date table (step 6 in the connection guide). Expect absurd values around the near-empty months of late 2016; that is the data, not a bug.
 
 ## Repeat Customer Rate
 
