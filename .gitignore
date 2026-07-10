@@ -220,7 +220,6 @@ __marimo__/
 # Project-private files, never committed
 .vscode/
 docs/*.docx
-*.pbix
 .env
 CLAUDE.md
 docs/INTERVIEW_NOTES.md
